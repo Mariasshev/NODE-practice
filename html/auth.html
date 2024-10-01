@@ -3,13 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    
-    <!-- стили Bootstrap -->
+    <title>Authorize page</title>
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+
+    <style>
+        html,body{
+            background-color: rgb(223, 223, 223);
+        }
+        .title-border{
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgb(218, 217, 217);
+        }
+    </style>
 </head>
 <body>
-    <p class="h1">Hello!</h1>
-    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <div class="row justify-content-center align-items-center">
+        <div class="col-12 col-md-6 col-lg-3 position-absolute start-50 top-50 translate-middle">
+            <div class="bg-white shadow p-3 mb-5 bg-body-tertiary rounded">
+                <form class="row g-2" action="POST">
+                    <div class="title-border">
+                        Authorization
+                    </div>
+                    <div>
+                        <label for="inputLogin" class="form-label fw-bold">Login</label>
+                        <input type="login" id="inputLogin" class="form-control" aria-describedby="loginHelpBlock" required>
+                    </div>
+                    <div>
+                        <label for="inputPassword5" class="form-label">Password</label>
+                        <input type="password" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock" required>
+                    </div>
+                    <div class="mt-3">
+                        <button type="submit" class="btn btn-secondary">Sign in</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 </body>
 </html>
