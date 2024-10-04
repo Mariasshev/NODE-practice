@@ -1,58 +1,315 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Список групп</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
-    <div class="container mt-5">
-        <h1 class="text-center mb-4">Список групп</h1>
+<!doctype html>
+<html lang="en" data-bs-theme="auto">
+  <head>
 
-        <!-- Таблица для отображения групп -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.122.0">
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/dashboard/">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+
+      html, body {
+          height: 100%;
+          margin: 0;
+      }
+
+      @media (min-width: 768px) {
+        .sidebar {
+          height:100vh;  
+          overflow-y: auto;
+      }
+      }
+     
+
+      .btn-hv {
+        background-color: rgb(75, 172, 254);
+        border: 1px solid rgb(75, 172, 254);
+        color: white;
+      }
+      .btn-hv:hover {
+        border: 1px solid rgb(75, 172, 254);
+        color: rgb(75, 172, 254);
+      }
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+
+      .b-example-divider {
+        width: 100%;
+        height: 3rem;
+        background-color: rgba(0, 0, 0, .1);
+        border: solid rgba(0, 0, 0, .15);
+        border-width: 1px 0;
+        box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+      }
+
+      .b-example-vr {
+        flex-shrink: 0;
+        width: 1.5rem;
+        height: 100vh;
+      }
+
+      .bi {
+        vertical-align: -.125em;
+        fill: currentColor;
+      }
+
+      .nav-scroller {
+        position: relative;
+        z-index: 2;
+        height: 2.75rem;
+        overflow-y: hidden;
+      }
+
+      .nav-scroller .nav {
+        display: flex;
+        flex-wrap: nowrap;
+        padding-bottom: 1rem;
+        margin-top: -1px;
+        overflow-x: auto;
+        text-align: center;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .btn-bd-primary {
+        --bd-violet-bg: #712cf9;
+        --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
+
+        --bs-btn-font-weight: 600;
+        --bs-btn-color: var(--bs-white);
+        --bs-btn-bg: var(--bd-violet-bg);
+        --bs-btn-border-color: var(--bd-violet-bg);
+        --bs-btn-hover-color: var(--bs-white);
+        --bs-btn-hover-bg: #6528e0;
+        --bs-btn-hover-border-color: #6528e0;
+        --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
+        --bs-btn-active-color: var(--bs-btn-hover-color);
+        --bs-btn-active-bg: #5a23c8;
+        --bs-btn-active-border-color: #5a23c8;
+      }
+
+      .bd-mode-toggle {
+        z-index: 1500;
+      }
+
+      .bd-mode-toggle .dropdown-menu .active .bi {
+        display: block !important;
+      }
+      .nav-link i {
+        vertical-align: middle; 
+        align-items: center;
+    }
+    </style>
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- Custom styles for this template -->
+    <link href="dashboard.css" rel="stylesheet">
+  </head>
+  <body>
+
+<header class="navbar sticky-top bg-light flex-md-nowrap p-0 shadow" data-bs-theme="dark">
+  <h2 class="navbar-brand col-md-3 col-lg-2 me-0 px-3 py-3 text-black mb-0" href="#">Bookery Admin</h2>
+
+  <ul class="navbar-nav flex-row d-md-none">
+    <li class="nav-item text-nowrap">
+      <button class="nav-link px-3 text-white" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="bi bi-list text-dark"></i>
+      </button>
+    </li>
+  </ul>
+
+  <div id="navbarSearch" class="navbar-search w-100 collapse">
+    <input class="form-control w-100 rounded-0 border-0" type="text" placeholder="Search" aria-label="Search">
+  </div>
+</header>
+
+<div class="container-fluid">
+  <div class="row" style="height: 100%;">
+    <div class="sidebar border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary">
+      <div class="offcanvas-md offcanvas-end bg-body-tertiary" tabindex="-1" id="sidebarMenu" aria-labelledby="sidebarMenuLabel">
+          <div class="offcanvas-body d-md-flex flex-column p-0 pt-lg-3">
+              <h4 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-body-secondary text-uppercase">
+                  <span>Bookshop</span>
+              </h4>
+              <ul class="nav flex-column mb-auto">
+                  <li class="nav-item">
+                      <a href="/books" class="nav-link d-flex align-items-center gap-2 <%= currentPath === '/books' ? 'active' : '' %>">
+                          <i class="bi bi-book"></i>
+                          Books
+                      </a>
+                  </li>
+                  <li class="nav-item">
+                      <a href="/orders" class="nav-link d-flex align-items-center gap-2 <%= currentPath === '/orders' ? 'active' : '' %>">
+                          <i class="bi bi-file-earmark-text"></i>
+                          Orders
+                      </a>
+                  </li>
+              </ul>
+              <hr class="my-3">
+              <ul class="nav flex-column mb-auto">
+                <li class="nav-item">
+                  <a href="/admin" class="nav-link d-flex align-items-center gap-2">
+                    <i class="bi bi-arrow-right-circle"></i>
+                      Start Page
+                  </a>
+                </li>
+                  <li class="nav-item">
+                      <a href="/users" class="nav-link d-flex align-items-center gap-2 <%= currentPath === '/users' ? 'active' : '' %>">
+                          <i class="bi bi-people"></i>
+                          Users
+                      </a>
+                  </li>
+                  <li class="nav-item">
+                      <a href="/auth" class="nav-link d-flex align-items-center gap-2 <%= currentPath === '/auth' ? 'active' : '' %>">
+                          <i class="bi bi-box-arrow-left"></i>
+                          Sign out
+                      </a>
+                  </li>
+              </ul>
+          </div>
+      </div>
+    </div>
+  
+
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+
+      <div class="bg-success py-2 d-none" id="success">
+        <h6 class="text-white text-center mb-0 fw-normal"></h6>
+      </div>
+
+      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Books</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+          <div class="btn-group me-2">
+            <a href="/books/add-new" class="btn btn-sm btn-hv">New Book</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="table-responsive small">
         <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Название группы</th>
-                    <th>Действия</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Цикл для вывода всех групп -->
-                <% groups.forEach(function(group) { %>
-                    <tr>
-                        <td><%= group.Id %></td>
-                        <td><%= group.Name %></td>
-                        <td>
-                            <button class="btn btn-warning btn-sm" type="edit">Редактировать</button>
-                            <button class="btn btn-danger btn-sm" type="delete">Удалить</button>
-                        </td>
-                    </tr>
-                <% }); %>
-            </tbody>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>State</th>
+              <th>Created at</th>
+              <th>Updated at</th>
+              <th>User</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% books.forEach(function(book) { %>
+            <tr>
+              <td><%= book.id %></td>
+              <td><%= book.name %></td>
+              <td><%= book.state %></td>
+              <td><%= book.created_at %></td>
+              <td><%= book.updated_at %></td>
+              <td><%= book.user_is %></td>
+              <td>
+                <a href='/books/edit/<%=book.id%>' class="btn btn-warning btn-sm">Edit</a>
+                <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteConfirmationModal" data-id="<%= book.id %>">Delete</button>
+              </td>
+            </tr>
+            <% }); %>
+          </tbody>
         </table>
+      </div>
 
-        <!-- Форма для добавления новой группы -->
-        <div class="card mt-4">
-            <div class="card-body">
-                <h5 class="card-title">Добавить новую группу</h5>
-                <form action="/add-group" method="GET">
-                    <div class="mb-3">
-                        <label for="name" class="form-label">Название группы</label>
-                        <input type="text" class="form-control" id="groupName" name="name" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="Id_Faculty" class="form-label">Номер факультета</label>
-                        <input type="text" class="form-control" id="Id_Faculty" name="Id_Faculty" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Добавить группу</button>
-                </form>
-            </div>
+      <div class="col-12 col-md-4 col-lg-2">
+        <div class="text-start">
+            Displaying all <strong><%= books.length %></strong> Books
         </div>
     </div>
+    </main>
+  </div>
+</div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-</body>
+
+<div class="modal fade" id="deleteConfirmationModal" tabindex="-1" aria-labelledby="deleteConfirmationLabel" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="deleteConfirmationLabel">Подтверждение удаления</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            Are you sure you want to delete this book?
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+              <button type="button" class="btn btn-danger" id="confirmDelete">Удалить</button>
+          </div>
+      </div>
+  </div>
+</div>
+
+
+
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.2/dist/chart.umd.js" integrity="sha384-eI7PSr3L1XLISH8JdDII5YN/njoSsxfbrkCTnJrzXt+ENP5MOVBxD+l6sEG4zoLp" crossorigin="anonymous"></script><script src="dashboard.js"></script></body>
+
+    <script>
+      let bookIdToDelete = null;
+    
+      document.getElementById('deleteConfirmationModal').addEventListener('show.bs.modal', function (event) {
+          const button = event.relatedTarget; // Кнопка, которая вызвала модальное окно
+          bookIdToDelete = button.getAttribute('data-id'); 
+          console.log(bookIdToDelete); // Проверка
+      });
+    
+      document.getElementById('confirmDelete').addEventListener('click', function() {
+          if (bookIdToDelete) {
+              fetch(`/books/delete/${bookIdToDelete}`, {
+                  method: 'DELETE',
+                  headers: {
+                      'Content-Type': 'application/json'
+                  }
+              })
+              .then(response => response.json()) 
+              .then(data => {
+                  if (data.success) { 
+                      const modal = bootstrap.Modal.getInstance(document.getElementById('deleteConfirmationModal'));
+                      modal.hide();
+    
+                      const successMessage = document.getElementById('success');
+                      successMessage.querySelector('h6').textContent = data.message; 
+                      successMessage.classList.remove('d-none'); 
+    
+                      setTimeout(() => {
+                          successMessage.classList.add('d-none'); 
+                          window.location.href = '/books'; 
+                      }, 3000); 
+                  } else {
+                      console.error('Ошибка при удалении книги');
+                  }
+              })
+              .catch(error => {
+                  console.error('Ошибка запроса:', error);
+              });
+          }
+      });
+    </script>
 </html>

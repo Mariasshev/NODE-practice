@@ -4,41 +4,103 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Authorize page</title>
-    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
-
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        html,body{
-            background-color: rgb(223, 223, 223);
+        html, body {
+            background-color: rgb(216, 216, 216);
         }
-        .title-border{
+        .title-border {
             padding-bottom: 10px;
             border-bottom: 1px solid rgb(218, 217, 217);
+        }
+        .blue-color {
+            background-color: rgb(75, 172, 254);
+        }
+        .border-blue {
+            border-top: 5px solid rgb(75, 172, 254);
+        }
+        .btn-hv {
+            background-color: rgb(75, 172, 254);
+            border: 1px solid rgb(75, 172, 254);
+            color: white;
+        }
+        .btn-hv:hover {
+            border: 1px solid rgb(75, 172, 254);
+            color: rgb(75, 172, 254);
+        }
+        .text-gray {
+            color: #464646;
+        }
+        .error {
+            background-color: #dc4747;
         }
     </style>
 </head>
 <body>
+
+    <div class="error py-2 d-none" id="invalid_data">
+       <h6 class="text-white text-center mb-0 fw-normal"></h6>
+   </div>
+
     <div class="row justify-content-center align-items-center">
         <div class="col-12 col-md-6 col-lg-3 position-absolute start-50 top-50 translate-middle">
-            <div class="bg-white shadow p-3 mb-5 bg-body-tertiary rounded">
-                <form class="row g-2" action="POST">
-                    <div class="title-border">
-                        Authorization
+            <div class="bg-white shadow p-3 mb-5 bg-body-tertiary rounded border-blue px-4">
+                <form id="loginForm" class="row g-2" method="POST">
+                    <div class="text-center mt-3">
+                        <h5 class="text-gray">Bookery Admin Login</h5>
                     </div>
                     <div>
-                        <label for="inputLogin" class="form-label fw-bold">Login</label>
-                        <input type="login" id="inputLogin" class="form-control" aria-describedby="loginHelpBlock" required>
+                        <label for="login" class="form-label text-light-emphasis">Login*</label>
+                        <input type="text" name="login" class="form-control" aria-describedby="loginHelpBlock" >
                     </div>
                     <div>
-                        <label for="inputPassword5" class="form-label">Password</label>
-                        <input type="password" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock" required>
+                        <label for="password" class="form-label text-light-emphasis">Password*</label>
+                        <input type="password" name="password" class="form-control" aria-describedby="passwordHelpBlock" >
                     </div>
-                    <div class="mt-3">
-                        <button type="submit" class="btn btn-secondary">Sign in</button>
+                    <div class="mt-3 text-center">
+                        <button type="submit" class="btn btn-hv px-4">Login</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-    <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+
+    <script>
+        document.querySelector('#loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const login = document.querySelector('input[name="login"]').value;
+            const password = document.querySelector('input[name="password"]').value;
+
+            const errorDiv = document.getElementById('invalid_data');
+            errorDiv.classList.add('d-none');
+
+            fetch('/auth', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ login, password })
+            })
+            .then(response => {
+                if (response.ok) {
+                    window.location.href = '/admin';
+                } else {
+                    return response.json().then(data => {
+                        errorDiv.classList.remove('d-none');
+                        errorDiv.classList.add('d-block', 'text-white', 'text-center', 'mb-0', 'fw-normal');
+                        errorDiv.textContent = data.error;
+                    });
+                }
+            })
+            .catch(err => {
+                console.error('Ошибка:', err);
+                errorDiv.classList.remove('d-none');
+                errorDiv.textContent = 'Error. Try again.';
+            });
+        });
+    </script>
+    
 </body>
 </html>
