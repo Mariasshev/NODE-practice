@@ -14,13 +14,13 @@ app.use(jsonParser);
 app.set('view engine', 'ejs');
 app.set('views', __dirname + '/views');
 
-// Обслуживаем папку node_modules для Bootstrap и других пакетов
+// node_modules для Bootstrap и других пакетов
 app.use('/css', express.static(path.join(__dirname, 'node_modules/bootstrap/dist/css')));
 app.use('/js', express.static(path.join(__dirname, 'node_modules/bootstrap/dist/js')));
 app.use(express.static(path.join(__dirname, 'html')));  
 
 // Middleware для парсинга тела запроса
-app.use(express.urlencoded({ extended: true })); // Для данных из форм
+app.use(express.urlencoded({ extended: true })); 
 app.use(express.json()); // Для JSON-данных
 
 var insertHandler = require('./js/inserthandler'); 
