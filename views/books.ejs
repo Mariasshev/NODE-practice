@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Список групп</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Список групп</h1>
+
+        <!-- Таблица для отображения групп -->
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Название группы</th>
+                    <th>Действия</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Цикл для вывода всех групп -->
+                <% groups.forEach(function(group) { %>
+                    <tr>
+                        <td><%= group.Id %></td>
+                        <td><%= group.Name %></td>
+                        <td>
+                            <button class="btn btn-warning btn-sm" type="edit">Редактировать</button>
+                            <button class="btn btn-danger btn-sm" type="delete">Удалить</button>
+                        </td>
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
+
+        <!-- Форма для добавления новой группы -->
+        <div class="card mt-4">
+            <div class="card-body">
+                <h5 class="card-title">Добавить новую группу</h5>
+                <form action="/add-group" method="GET">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Название группы</label>
+                        <input type="text" class="form-control" id="groupName" name="name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="Id_Faculty" class="form-label">Номер факультета</label>
+                        <input type="text" class="form-control" id="Id_Faculty" name="Id_Faculty" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Добавить группу</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
